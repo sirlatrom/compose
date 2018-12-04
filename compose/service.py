@@ -1061,7 +1061,7 @@ class Service(object):
                 'Impossible to perform platform-targeted builds for API version < 1.35'
             )
 
-        version = "1"
+        version = None
         if os.getenv('DOCKER_BUILDKIT') == "1":
             version = "2"
 
