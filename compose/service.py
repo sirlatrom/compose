@@ -1061,6 +1061,10 @@ class Service(object):
                 'Impossible to perform platform-targeted builds for API version < 1.35'
             )
 
+        version = "1"
+        if os.getenv('DOCKER_BUILDKIT') == "1":
+            version = "2"
+
         build_output = self.client.build(
             path=path,
             tag=self.image_name,
@@ -1082,6 +1086,7 @@ class Service(object):
             gzip=gzip,
             isolation=build_opts.get('isolation', self.options.get('isolation', None)),
             platform=self.platform,
+            version=version,
         )
 
         try:
